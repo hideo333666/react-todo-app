@@ -4,13 +4,12 @@ import Header from './header';
 import TodoApp from './components/Todo/Todo';
 
 const App: React.FC = () => {
-  return (
-    <div className="App">
-      <Header />
-      <TodoApp />
-    </div>
-  );
+    return (
+        <div className="App">
+            <Header />
+            <TodoApp />
+        </div>
+    );
 };
 
 export default App;
-
