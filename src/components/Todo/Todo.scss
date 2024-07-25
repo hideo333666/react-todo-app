@@ -1,0 +1,69 @@
+/* src/components/Todo/Todo.scss */
+.todo-list {
+    display: flex;
+}
+
+.column {
+    margin: 8px;
+    border: 1px solid lightgrey;
+    border-radius: 2px;
+    width: 220px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+}
+
+.column h3 {
+    padding: 8px;
+    border-bottom: 1px solid lightgrey;
+    background-color: #f8f8f8;
+    border-radius: 2px 2px 0 0;
+}
+
+.task-list {
+    padding: 8px;
+    transition: background-color 0.2s ease;
+    background-color: inherit;
+    flex-grow: 1;
+    min-height: 100px;
+}
+
+.task {
+    border: 1px solid lightgrey;
+    padding: 8px;
+    margin-bottom: 8px;
+    border-radius: 2px;
+    background-color: white;
+    cursor: grab;
+}
+
+.task:active {
+    background-color: #f0f0f0;
+}
+
+.add-task {
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+}
+
+.add-task input {
+    margin-bottom: 8px;
+    padding: 8px;
+    border: 1px solid lightgrey;
+    border-radius: 2px;
+}
+
+.add-task button,
+.add-task-button {
+    padding: 8px;
+    border: 1px solid lightgrey;
+    border-radius: 2px;
+    background-color: #f8f8f8;
+    cursor: pointer;
+}
+
+.add-task button:hover,
+.add-task-button:hover {
+    background-color: #e0e0e0;
+}
