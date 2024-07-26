@@ -93,21 +93,36 @@ const TodoApp: React.FC = () => {
         }));
     };
 
+    const handleAddColumn = () => {
+        const newColumnId = `column-${Date.now()}`;
+        const newColumn: Column = { id: newColumnId, title: `New Column`, taskIds: [] };
+
+        setColumns((prevColumns) => ({
+            ...prevColumns,
+            [newColumnId]: newColumn,
+        }));
+    };
+
     return (
-        <div className="todo-list">
-            {Object.values(columns).map((column) => {
-                const tasksForColumn = column.taskIds.map((taskId) => tasks[taskId]);
-                return (
-                    <ColumnComponent
-                        key={column.id}
-                        column={column}
-                        tasks={tasksForColumn}
-                        onDragOver={onDragOver}
-                        onDrop={onDrop}
-                        onAddTask={handleAddTask}
-                    />
-                );
-            })}
+        <div className="todo-app">
+            <div className="todo-list">
+                {Object.values(columns).map((column) => {
+                    const tasksForColumn = column.taskIds.map((taskId) => tasks[taskId]);
+                    return (
+                        <ColumnComponent
+                            key={column.id}
+                            column={column}
+                            tasks={tasksForColumn}
+                            onDragOver={onDragOver}
+                            onDrop={onDrop}
+                            onAddTask={handleAddTask}
+                        />
+                    );
+                })}
+            </div>
+            <button className="add-column-button" onClick={handleAddColumn}>
+                + もう一つリストを追加
+            </button>
         </div>
     );
 };

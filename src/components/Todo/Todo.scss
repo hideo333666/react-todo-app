@@ -11,59 +11,77 @@
     display: flex;
     flex-direction: column;
     background-color: white;
-}
 
-.column h3 {
-    padding: 8px;
-    border-bottom: 1px solid lightgrey;
-    background-color: #f8f8f8;
-    border-radius: 2px 2px 0 0;
+    h3 {
+        padding: 8px;
+        background-color: #f8f8f8;
+        border-radius: 2px 2px 0 0;
+    }
 }
 
 .task-list {
     padding: 8px;
     transition: background-color 0.2s ease;
-    background-color: inherit;
+    background-color: #f8f8f8;
     flex-grow: 1;
     min-height: 100px;
 }
 
 .task {
-    border: 1px solid lightgrey;
+    box-shadow: var(--ds-shadow-raised, 0px 1px 1px #091e4240, 0px 0px 1px #091e424f);
     padding: 8px;
     margin-bottom: 8px;
-    border-radius: 2px;
-    background-color: white;
-    cursor: grab;
-}
+    border-radius: 10px;
+    background-color: #fff;
 
-.task:active {
-    background-color: #f0f0f0;
+    &:hover {
+        outline: 2px solid var(--ds-border-focused, #388bff);
+    }
+
+    &:active {
+        background-color: #f0f0f0;
+    }
 }
 
 .add-task {
     display: flex;
     flex-direction: column;
     padding: 8px;
+
+    &__button {
+        padding: 8px;
+        border: 1px solid lightgrey;
+        border-radius: 2px;
+        background-color: #f8f8f8;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #e0e0e0;
+        }
+
+        & input {
+            margin-bottom: 8px;
+            padding: 8px;
+            border: 1px solid lightgrey;
+            border-radius: 2px;
+        }
+    }
 }
 
-.add-task input {
-    margin-bottom: 8px;
-    padding: 8px;
-    border: 1px solid lightgrey;
-    border-radius: 2px;
-}
+.add-column-button {
+    background-color: #f5f5f5; /* ボタンの背景色 */
+    border: 2px solid #ccc; /* ボタンのボーダー */
+    border-radius: 5px; /* 角の丸み */
+    padding: 10px 20px; /* パディング */
+    margin: 10px; /* マージン */
+    cursor: pointer; /* カーソル */
+    font-size: 16px; /* フォントサイズ */
+    color: #333; /* テキストの色 */
+    text-align: center; /* テキストの位置 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* シャドウ */
 
-.add-task button,
-.add-task-button {
-    padding: 8px;
-    border: 1px solid lightgrey;
-    border-radius: 2px;
-    background-color: #f8f8f8;
-    cursor: pointer;
-}
-
-.add-task button:hover,
-.add-task-button:hover {
-    background-color: #e0e0e0;
+    &:hover {
+        background-color: #e0e0e0; /* ホバー時の背景色 */
+        border-color: #bbb; /* ホバー時のボーダー色 */
+    }
 }

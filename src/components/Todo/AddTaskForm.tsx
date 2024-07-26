@@ -27,7 +27,9 @@ const AddTaskForm: React.FC<AddTaskFormProps> = ({ columnId, onAddTask }) => {
                 onChange={handleTaskContentChange}
                 placeholder="タスク内容を入力"
             />
-            <button onClick={handleAddTask}>追加</button>
+            <button className="add-task__button" onClick={handleAddTask}>
+                ＋ タスクを追加
+            </button>
         </div>
     );
 };

@@ -54,7 +54,7 @@ const ColumnComponent: React.FC<ColumnProps> = ({
             {isAddingTask ? (
                 <AddTaskForm columnId={column.id} onAddTask={onAddTask} />
             ) : (
-                <button className="add-task-button" onClick={handleAddTaskClick}>
+                <button className="add-task__button" onClick={handleAddTaskClick}>
                     タスクを追加
                 </button>
             )}
