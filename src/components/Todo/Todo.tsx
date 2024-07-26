@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ColumnComponent from './ColumnComponent';
 import './Todo.scss';
 
 interface Task {
@@ -12,79 +13,7 @@ interface Column {
     taskIds: string[];
 }
 
-interface ColumnProps {
-    column: Column;
-    tasks: Task[];
-    onDragOver: (event: React.DragEvent<HTMLDivElement>) => void;
-    onDrop: (event: React.DragEvent<HTMLDivElement>, columnId: string) => void;
-    onAddTask: (columnId: string, taskContent: string) => void;
-}
-
-const ColumnComponent: React.FC<ColumnProps> = ({
-    column,
-    tasks,
-    onDragOver,
-    onDrop,
-    onAddTask,
-}) => {
-    const [isAddingTask, setIsAddingTask] = useState(false);
-    const [newTaskContent, setNewTaskContent] = useState('');
-
-    const handleAddTaskClick = () => {
-        setIsAddingTask(true);
-    };
-
-    const handleTaskContentChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setNewTaskContent(event.target.value);
-    };
-
-    const handleAddTask = () => {
-        if (newTaskContent.trim()) {
-            onAddTask(column.id, newTaskContent.trim());
-            setNewTaskContent('');
-            setIsAddingTask(false);
-        }
-    };
-
-    return (
-        <div
-            className="column"
-            onDragOver={onDragOver}
-            onDrop={(event) => onDrop(event, column.id)}
-        >
-            <h3>{column.title}</h3>
-            <div className="task-list">
-                {tasks.map((task) => (
-                    <div
-                        key={task.id}
-                        className="task"
-                        draggable
-                        onDragStart={(event) => event.dataTransfer.setData('taskId', task.id)}
-                    >
-                        {task.content}
-                    </div>
-                ))}
-            </div>
-            {isAddingTask ? (
-                <div className="add-task">
-                    <input
-                        type="text"
-                        value={newTaskContent}
-                        onChange={handleTaskContentChange}
-                        placeholder="タスク内容を入力"
-                    />
-                    <button onClick={handleAddTask}>追加</button>
-                </div>
-            ) : (
-                <button className="add-task-button" onClick={handleAddTaskClick}>
-                    タスクを追加
-                </button>
-            )}
-        </div>
-    );
-};
-
-const TodoList: React.FC = () => {
+const TodoApp: React.FC = () => {
     const initialTasks: { [key: string]: Task } = {
         'task-1': { id: 'task-1', content: 'プロジェクト計画' },
         'task-2': { id: 'task-2', content: 'キックオフミーティング' },
@@ -183,4 +112,4 @@ const TodoList: React.FC = () => {
     );
 };
 
-export default TodoList;
+export default TodoApp;
