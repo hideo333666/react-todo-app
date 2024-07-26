@@ -41,32 +41,29 @@ const Header: React.FC = () => {
     useHeaderVisibility(HEADER_CLASS, TRIGGER_CLASS, VISIBLE_CLASS);
 
     return (
-        <>
-            <div className={TRIGGER_CLASS}></div>
-            <header className={HEADER_CLASS}>
-                <div className="header__title">
-                    <FaClipboardList className="header__icon" size={24} />
-                    <h1>ToDo App</h1>
-                </div>
-                <ul className="header__nav-links">
-                    <li className="header__nav-links__item">
-                        <a href="/" className="header__nav-links__item__link">
-                            Home
-                        </a>
-                    </li>
-                    <li className="header__nav-links__item">
-                        <a href="/about" className="header__nav-links__item__link">
-                            About
-                        </a>
-                    </li>
-                    <li className="header__nav-links__item">
-                        <a href="/contact" className="header__nav-links__item__link">
-                            Contact
-                        </a>
-                    </li>
-                </ul>
-            </header>
-        </>
+        <header className={HEADER_CLASS}>
+            <div className="header__title">
+                <FaClipboardList className="header__icon" size={24} />
+                <h1>ToDo App</h1>
+            </div>
+            <ul className="header__nav-links">
+                <li className="header__nav-links__item">
+                    <a href="/" className="header__nav-links__item__link">
+                        Home
+                    </a>
+                </li>
+                <li className="header__nav-links__item">
+                    <a href="/about" className="header__nav-links__item__link">
+                        About
+                    </a>
+                </li>
+                <li className="header__nav-links__item">
+                    <a href="/contact" className="header__nav-links__item__link">
+                        Contact
+                    </a>
+                </li>
+            </ul>
+        </header>
     );
 };
 

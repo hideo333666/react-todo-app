@@ -119,10 +119,10 @@ const TodoApp: React.FC = () => {
                         />
                     );
                 })}
+                <button className="add-column-button" onClick={handleAddColumn}>
+                    + もう一つリストを追加
+                </button>
             </div>
-            <button className="add-column-button" onClick={handleAddColumn}>
-                + もう一つリストを追加
-            </button>
         </div>
     );
 };

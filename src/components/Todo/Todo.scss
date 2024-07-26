@@ -1,18 +1,24 @@
 /* src/components/Todo/Todo.scss */
 .todo-list {
     display: flex;
+    flex-wrap: nowrap; /* 一列に並べる */
+    overflow-x: auto; /* 横スクロールを有効にする */
+    padding: 10px;
+    gap: 8px;
 }
 
 .column {
+    flex: 0 0 220px;
     margin: 8px;
     border: 1px solid lightgrey;
     border-radius: 2px;
-    width: 220px;
     display: flex;
     flex-direction: column;
     background-color: white;
 
-    h3 {
+    h2 {
+        font-size: 16px;
+        margin: 0px;
         padding: 8px;
         background-color: #f8f8f8;
         border-radius: 2px 2px 0 0;
@@ -69,19 +75,22 @@
 }
 
 .add-column-button {
-    background-color: #f5f5f5; /* ボタンの背景色 */
-    border: 2px solid #ccc; /* ボタンのボーダー */
-    border-radius: 5px; /* 角の丸み */
-    padding: 10px 20px; /* パディング */
-    margin: 10px; /* マージン */
-    cursor: pointer; /* カーソル */
-    font-size: 16px; /* フォントサイズ */
-    color: #333; /* テキストの色 */
-    text-align: center; /* テキストの位置 */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* シャドウ */
+    flex: 0 0 220px;
+    height: 50px;
+    background-color: #f5f5f5;
+    border: 2px solid #ccc;
+    border-radius: 12px;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
     &:hover {
-        background-color: #e0e0e0; /* ホバー時の背景色 */
-        border-color: #bbb; /* ホバー時のボーダー色 */
+        background-color: #e0e0e0;
+        border-color: #bbb;
     }
 }
+

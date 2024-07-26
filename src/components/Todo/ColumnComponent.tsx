@@ -45,7 +45,7 @@ const ColumnComponent: React.FC<ColumnProps> = ({
             onDragOver={onDragOver}
             onDrop={(event) => onDrop(event, column.id)}
         >
-            <h3>{column.title}</h3>
+            <h2>{column.title}</h2>
             <div className="task-list">
                 {tasks.map((task) => (
                     <Task key={task.id} task={task} onDragStart={handleDragStart} />
