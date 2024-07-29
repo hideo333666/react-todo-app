@@ -1,24 +1,17 @@
-# ベースイメージ
-FROM node:14
+# ベースイメージを指定
+FROM node:18
 
-# 作業ディレクトリを設定
+# アプリケーションディレクトリを作成
 WORKDIR /app
 
-# package.json と package-lock.json をコピー
+# package.jsonとpackage-lock.jsonをコピー
 COPY package*.json ./
 
 # 依存関係をインストール
 RUN npm install
 
-# アプリケーションのソースコードをコピー
+# ソースコードをコピー
 COPY . .
 
-# アプリケーションをビルド
-RUN npm run build
-
-# アプリケーションを提供するために使用するポート
-EXPOSE 3000
-
-# アプリケーションを起動
-CMD ["npm", "start"]
-
+# Vite開発サーバーを起動
+CMD ["npm", "run", "dev"]
