@@ -1,13 +1,16 @@
-// src/App.tsx
 import React from 'react';
-import Header from './Header/header';
+import Header from './components/Header/header';
 import TodoApp from './components/Todo/Todo';
 
 const App: React.FC = () => {
     return (
         <div className="App">
-            <Header />
-            <TodoApp />
+            <header>
+                <Header />
+            </header>
+            <main>
+                <TodoApp />
+            </main>
         </div>
     );
 };

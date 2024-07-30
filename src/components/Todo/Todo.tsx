@@ -47,31 +47,54 @@ const TodoApp: React.FC = () => {
 
     const onDrop = (event: React.DragEvent<HTMLDivElement>, columnId: string) => {
         const taskId = event.dataTransfer.getData('taskId');
+        const sourceColumnId = event.dataTransfer.getData('sourceColumnId');
 
-        const startColumnId = Object.keys(columns).find((id) =>
-            columns[id].taskIds.includes(taskId)
-        )!;
-        const startColumn = columns[startColumnId];
-        const finishColumn = columns[columnId];
+        const sourceColumn = columns[sourceColumnId];
+        const targetColumn = columns[columnId];
 
-        if (startColumn === finishColumn) {
-            return;
+        // If dropped within the same column
+        if (sourceColumnId === columnId) {
+            const sourceTaskIndex = sourceColumn.taskIds.indexOf(taskId);
+            sourceColumn.taskIds.splice(sourceTaskIndex, 1);
+            targetColumn.taskIds.push(taskId);
+
+            setColumns({
+                ...columns,
+                [sourceColumnId]: {
+                    ...sourceColumn,
+                    taskIds: sourceColumn.taskIds,
+                },
+            });
         }
+    };
 
-        const newStartTaskIds = startColumn.taskIds.filter((id) => id !== taskId);
-        const newFinishTaskIds = Array.from(finishColumn.taskIds);
-        newFinishTaskIds.push(taskId);
+    const handleTaskDrop = (
+        sourceColumnId: string,
+        sourceTaskId: string,
+        targetColumnId: string,
+        targetIndex: number
+    ) => {
+        setColumns((prevColumns) => {
+            const sourceColumn = prevColumns[sourceColumnId];
+            const targetColumn = prevColumns[targetColumnId];
+            const sourceTaskIndex = sourceColumn.taskIds.indexOf(sourceTaskId);
 
-        setColumns({
-            ...columns,
-            [startColumn.id]: {
-                ...startColumn,
-                taskIds: newStartTaskIds,
-            },
-            [finishColumn.id]: {
-                ...finishColumn,
-                taskIds: newFinishTaskIds,
-            },
+            // Remove task from source column
+            sourceColumn.taskIds.splice(sourceTaskIndex, 1);
+            // Add task to target column at the specified index
+            targetColumn.taskIds.splice(targetIndex, 0, sourceTaskId);
+
+            return {
+                ...prevColumns,
+                [sourceColumnId]: {
+                    ...sourceColumn,
+                    taskIds: sourceColumn.taskIds,
+                },
+                [targetColumnId]: {
+                    ...targetColumn,
+                    taskIds: targetColumn.taskIds,
+                },
+            };
         });
     };
 
@@ -116,6 +139,7 @@ const TodoApp: React.FC = () => {
                             onDragOver={onDragOver}
                             onDrop={onDrop}
                             onAddTask={handleAddTask}
+                            onTaskDrop={handleTaskDrop}
                         />
                     );
                 })}

@@ -20,6 +20,12 @@ interface ColumnProps {
     onDragOver: (event: React.DragEvent<HTMLDivElement>) => void;
     onDrop: (event: React.DragEvent<HTMLDivElement>, columnId: string) => void;
     onAddTask: (columnId: string, taskContent: string) => void;
+    onTaskDrop: (
+        sourceColumnId: string,
+        sourceTaskId: string,
+        targetColumnId: string,
+        targetIndex: number
+    ) => void;
 }
 
 const ColumnComponent: React.FC<ColumnProps> = ({
@@ -28,6 +34,7 @@ const ColumnComponent: React.FC<ColumnProps> = ({
     onDragOver,
     onDrop,
     onAddTask,
+    onTaskDrop,
 }) => {
     const [isAddingTask, setIsAddingTask] = useState(false);
 
@@ -37,6 +44,14 @@ const ColumnComponent: React.FC<ColumnProps> = ({
 
     const handleDragStart = (event: React.DragEvent<HTMLDivElement>, taskId: string) => {
         event.dataTransfer.setData('taskId', taskId);
+        event.dataTransfer.setData('sourceColumnId', column.id);
+    };
+
+    const handleDrop = (event: React.DragEvent<HTMLDivElement>, targetTaskIndex: number) => {
+        event.preventDefault();
+        const sourceTaskId = event.dataTransfer.getData('taskId');
+        const sourceColumnId = event.dataTransfer.getData('sourceColumnId');
+        onTaskDrop(sourceColumnId, sourceTaskId, column.id, targetTaskIndex);
     };
 
     return (
@@ -47,8 +62,16 @@ const ColumnComponent: React.FC<ColumnProps> = ({
         >
             <h2>{column.title}</h2>
             <div className="task-list">
-                {tasks.map((task) => (
-                    <Task key={task.id} task={task} onDragStart={handleDragStart} />
+                {tasks.map((task, index) => (
+                    <div
+                        key={task.id}
+                        draggable
+                        onDragStart={(event) => handleDragStart(event, task.id)}
+                        onDrop={(event) => handleDrop(event, index)}
+                        onDragOver={(event) => event.preventDefault()}
+                    >
+                        <Task task={task} />
+                    </div>
                 ))}
             </div>
             {isAddingTask ? (
